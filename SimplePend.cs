@@ -13,6 +13,7 @@ namespace Sim
         int n = 2;              // number of states
         private double[] x;     // array of states
         private double[] f;     //right side of equation evaluated
+        private string m;       //type of integrator used, default RK4
         //--------------------------------------------------------------------
         //constructor
         //--------------------------------------------------------------------
@@ -20,26 +21,31 @@ namespace Sim
         {
             x = new double[n];
             f = new double[n];
-
+            m = "Euler";
             x[0] = 1.0;
             x[1] = 0;
         }
 
 
         //--------------------------------------------------------------------
-        // step: perform one integration step via Euler
-        // soon to have RK4
+        // step: perform one integration step via Euler or RK4
         //--------------------------------------------------------------------
 
         public void step(double dt)
         {
             rhsFunc(x,f);
             
-            for(int i=0;i<n;++i)
+            if(m == "Euler")
             {
-                x[i] = x[i] + f[i] * dt;
+                for(int i=0;i<n;++i)
+                {
+                    x[i] = x[i] + f[i] * dt;
+                }
             }
-            //Console.WriteLine($"{f[0].ToString()} {f[1].ToString()}");
+            else if(m == "RK4")
+            {
+
+            }
         }
 
         //--------------------------------------------------------------------
