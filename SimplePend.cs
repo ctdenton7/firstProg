@@ -28,6 +28,7 @@ namespace Sim
 
         //--------------------------------------------------------------------
         // step: perform one integration step via Euler
+        // soon to have RK4
         //--------------------------------------------------------------------
 
         public void step(double dt)
