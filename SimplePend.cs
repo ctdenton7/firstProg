@@ -13,9 +13,10 @@ namespace Sim
         int n = 2;              // number of states
         private double[] x;     // array of states
         private double[] f;     //right side of equation evaluated
-        private string m;       //type of integrator used, default RK4
-        private double[] sl;
-        private double xi;
+        // private string m;       //type of integrator used, default RK4
+        // private double[] sl;
+        // private double xi;
+
         //--------------------------------------------------------------------
         //constructor
         //--------------------------------------------------------------------
@@ -23,42 +24,42 @@ namespace Sim
         {
             x = new double[n];
             f = new double[n];
-            m = "Euler";
-            sl = new double[4];
+            // m = "Euler";
+            // sl = new double[4];
             x[0] = 1.0;
             x[1] = 0;
         }
 
 
         //--------------------------------------------------------------------
-        // step: perform one integration step via Euler or RK4
+        // step: perform one integration step via Euler
         //--------------------------------------------------------------------
 
         public void step(double dt)
         {
             rhsFunc(x,f);
             
-            if(m == "Euler")
-            {
+            // if(m == "Euler")
+            // {
                 for(int i=0;i<n;++i)
                 {
                     x[i] = x[i] + f[i] * dt;
                 }
-            }
-            else if(m == "RK4")
-            {
-                for(int i=0;i<n;++i)
-                {
-                    sl[0] = f[i];                           // KA
-                    xi = x[i] + sl[0] * 0.5 * dt;
-                    sl[1] = f[i]; //+0.5 * dt;              // KB
-                    xi = x[i] + sl[1] * 0.5 * dt;
-                    sl[2] = f[i]; //+0.5 * dt;              // KC
-                    xi= x[i] + sl[2] * dt;
-                    sl[3] = f[i];                           // KD
-                    x[i] = x[i] + (sl[0] + 2.0 * sl[1] + 2.0 * sl[2] + sl[3])/6.0 * dt;
-                }
-            }
+            // }
+            // else if(m == "RK4")
+            // {
+            //     for(int i=0;i<n;++i)
+            //     {
+            //         sl[0] = f[i];                           // KA
+            //         xi = x[i] + sl[0] * 0.5 * dt;
+            //         sl[1] = f[i]; //+0.5 * dt               // KB
+            //         xi = x[i] + sl[1] * 0.5 * dt;
+            //         sl[2] = f[i]; //+0.5 * dt               // KC
+            //         xi= x[i] + sl[2] * dt;
+            //         sl[3] = f[i];                           // KD
+            //         x[i] = x[i] + (sl[0] + 2.0 * sl[1] + 2.0 * sl[2] + sl[3])/6.0 * dt;
+            //     }
+            // }
         }
 
         //--------------------------------------------------------------------
